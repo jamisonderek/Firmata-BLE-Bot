@@ -17,6 +17,8 @@ var keypress = require('keypress');
 var bleSerial = new BLESerialPort();
 var board = new five.Board({port: bleSerial, repl: false});
 
+var currentSpeed = 255;
+
 board.on("ready", function() {
 
   //load atafruit motor shield configs
@@ -76,25 +78,25 @@ board.on("ready", function() {
         }
 
     if (key && key.name == 'w') {
-      forward(255);
+      forward(currentSpeed);
       console.log('forward command');
 
     }
 
     if (key && key.name == 's') {
-      reverse(255);
+      reverse(currentSpeed);
       console.log('reverse command');
 
     }
 
     if (key && key.name == 'a') {
-      left(255);
+      left(currentSpeed);
       console.log('left command');
 
     }
 
     if (key && key.name == 'd') {
-      right(255);
+      right(currentSpeed);
       console.log('right command');
 
     }
@@ -105,6 +107,23 @@ board.on("ready", function() {
 
     }
 
+    if (key && key.name == 'z') {
+      if (currentSpeed>1) 
+      { 
+         currentSpeed--; 
+      }
+      console.log('speed:'+currentSpeed);
+
+    }
+
+    if (key && key.name == 'x') {
+      if (currentSpeed<255) 
+      { 
+         currentSpeed++; 
+      }
+      console.log('speed:'+currentSpeed);
+
+    }
   });
 
   process.stdin.setRawMode(true);
