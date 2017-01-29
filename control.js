@@ -14,7 +14,7 @@ var BLESerialPort = require('ble-serial').SerialPort;
 var keypress = require('keypress');
 
 //use the virtual serial port to send a command to a firmata device
-var bleSerial = new BLESerialPort();
+var bleSerial = new BLESerialPort({localName: 'FIRMATA'});
 var board = new five.Board({port: bleSerial, repl: false});
 
 board.on("ready", function() {
